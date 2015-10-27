@@ -56,21 +56,21 @@ prompt.get(schema, function (err, input) {
       const csvData = data.slice(1);
 
       const uploadFile = function(url, timesync) {
-        let params = {
-          form: {
-            url: url,
-            interval: timesync,
-            auth_token: input.cartodbApiKey
-          }
-        };
-        request.post(cartodbApiUrl, params, function(err, httpResponse, body) {
-          if (err) {
+        request({
+          method: 'POST',
+          uri: `${cartodbApiUrl}?api_key=${input.cartodbApiKey}`,
+          headers: {'content-type': 'application/json'},
+          body: JSON.stringify({ url: url, interval: timesync })
+        }, function(err, httpResponse, body) {
+          if (err || httpResponse.statusCode !== 200) {
+            console.log(`${httpResponse.statusCode}: ${httpResponse.statusMessage}`.red);
             return console.log(`Failed: ${url}`.red);
           }
-          console.info(`Uploaded successfully: ${url}`.green);
+          var res = JSON.parse(body);
+          console.info(`Uploaded successfully: ${url} | import_id: ${res.id} | item_queue_id: ${res.data_import.item_queue_id}`.green);
         });
 
-        console.info('Uploading...'.cyan);
+        console.info('Starting...'.cyan);
       };
 
       // For each csv row upload file
