@@ -1,0 +1,29 @@
+{
+  "name": "cartodb-uploader",
+  "version": "1.0.0",
+  "description": "A script to upload tables from CSV file",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/davidsingal/cartodb-uploader-script.git"
+  },
+  "keywords": [
+    "cartodb"
+  ],
+  "author": "David Inga <davidsingal@icloud.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davidsingal/cartodb-uploader-script/issues"
+  },
+  "homepage": "https://github.com/davidsingal/cartodb-uploader-script#readme",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "csv": "^0.4.6",
+    "prompt": "^0.2.14",
+    "request": "^2.65.0"
+  }
+}
